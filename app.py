@@ -37,7 +37,7 @@ def upload_image(image_bytes):
 # Classify image content (fruits/vegetables or others)
 def classify_image(sample_file):
     model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest")
-    response = model.generate_content([sample_file, "check whther it is an image of vegetable/fruit , do not get confused by the images of fruits and vegetables that are there on the packet of packaged food itmes? Answer 'yes' or 'no' only."])
+    response = model.generate_content([sample_file, "check whether it is an image of vegetable/fruit , do not get confused by the images of fruits and vegetables that are there on the packet of packaged food items? Answer 'yes' or 'no' only."])
     classification = response.text.strip().lower()
     return classification == "yes"
 
@@ -47,7 +47,6 @@ def add_timestamp(details):
     details["timestamp"] = timestamp
     return details
     
-# Predict freshness for fruits/vegetables
 # Predict details for multiple fruits/vegetables
 def predict_multiple_fruit_or_vegetable_details(sample_file):
     """
