@@ -50,14 +50,28 @@ def predict_multiple_fruit_or_vegetable_details(sample_file):
     model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest")
     response = model.generate_content([
         sample_file,
-        """List the name, freshness index (scale of 1-10), and expected life span ((1.6 * freshness index)rounded off to nearest whole number) for each fruit/vegetable in the image. 
-        Return the result in JSON format like this:
-        {
-            "items": [
-                {"name": "Apple", "freshness_index": 9, "expected_life_span": 14.4},
-                {"name": "Banana", "freshness_index": 6, "expected_life_span": 9.6}
-            ]
-        }"""
+        """Analyze the image to identify the fruits and vegetables present. For each item, provide the following information in a JSON format:
+
+* **Name:** The common name of the fruit or vegetable.
+* **Freshness Index:** A numerical rating from 1 to 10 indicating the level of freshness.
+* **Expected Life Span:** The estimated number of days the item is expected to remain fresh, calculated as 1.6 times the Freshness Index, rounded to the nearest whole number.
+
+The JSON output should be in the following format:
+```json
+{
+  "items": [
+    { 
+      "name": "Apple",
+      "freshness_index": 9,
+      "expected_life_span": 14,
+    },
+    { 
+      "name": "Banana",
+      "freshness_index": 6,
+      "expected_life_span": 10,
+    }
+  ]
+}"""
     ])
     
     response_text = response.text.strip()
@@ -124,6 +138,7 @@ def generate_product_details(sample_file):
     response_text = response.text.strip()
     print(f"Generated Product Details Response: {response_text}")  # Debugging output
     return response_text
+    
 def add_timestamps_to_products(products):
     """Add timestamp to each product."""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S") + " +5:30"  # Current timestamp
@@ -199,6 +214,8 @@ async def predict_image(file: UploadFile = File(...)):
 # Run the API with Uvicorn
 if __name__ == '__main__':
     uvicorn.run(app, host='127.0.0.1', port=8000)
+
+## OLD CODE
 # import uvicorn
 # from fastapi import FastAPI, File, UploadFile
 # import google.generativeai as genai
