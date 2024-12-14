@@ -54,7 +54,7 @@ def predict_multiple_fruit_or_vegetable_details(sample_file):
 
 * **Name:** The common name of the fruit or vegetable.
 * **Freshness Index:** A numerical rating from 1 to 10 indicating the level of freshness.
-* **Expected Life Span:** The estimated number of days the item is expected to remain fresh, calculated as 1.6 times the Freshness Index, rounded to the nearest whole number.
+* **Expected Life Span:** realistic or practical number of days it is suitable to eat.
 
 The JSON output should be in the following format:
 ```json
@@ -63,12 +63,12 @@ The JSON output should be in the following format:
     { 
       "name": "Apple",
       "freshness_index": 9,
-      "expected_life_span": 14,
+      "expected_life_span":8,
     },
     { 
       "name": "Banana",
       "freshness_index": 6,
-      "expected_life_span": 10,
+      "expected_life_span": 5,
     }
   ]
 }"""
@@ -129,7 +129,7 @@ def generate_product_details(sample_file):
                 "expiry_date": "2024-12-15",
                 "product_count": 1,
                 "is_expired": "NO",
-                "expected_life_span": 5
+                "expected_life_span": 2
             }
         ]
     }I want only these details, no more text."""
